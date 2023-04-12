@@ -182,6 +182,9 @@ let mappedArr = arr.map((items)=>{
 
 console.log(mappedArr);
 */
+
+
+/*
 let numbers = [1, 2, -8, 7, -7];
 
 let items = numbers
@@ -193,3 +196,4 @@ let items = numbers
   });
 
 console.log(items);
+*/
