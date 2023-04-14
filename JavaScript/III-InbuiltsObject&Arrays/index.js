@@ -105,6 +105,74 @@ let slicedArray = num1.slice(2,4);
 console.log(slicedArray);
 
 */
+
+// Combining Objects
+
+
+// Using Spread Operator
+
+/*
+let personName = {
+  firstName: "Vinayak",
+  lastName: "Vispute",
+};
+
+let courseDetails = {
+  branch: "Btech",
+  course: "CSE",
+  duration: 4,
+  schoolName: "KSET",
+};
+
+let studentDetails = {
+  ...personName,
+  ...courseDetails,
+};
+console.log(studentDetails);
+courseDetails.course="Computer Science and Enginerring";
+console.log(studentDetails)
+
+
+// In Spread Operator If objects have a property with the same name, then the right-most object property overwrites the previous one.
+
+let job = {
+    jobTitle: "JavaScript Developer",
+    country: "USA",
+  };
+
+  let location = {
+    city: "London",
+    country: "England",
+  };
+
+  let remoteJob = {
+    ...job,
+    ...location,
+  };
+
+  console.log(remoteJob);
+
+  */
+// using Object.assign() method
+
+/*
+let personName = {
+  firstName: "Vinayak",
+  lastName: "Vispute",
+};
+
+let courseDetails = {
+  branch: "Btech",
+  course: "CSE",
+  duration: 4,
+  schoolName: "KSET",
+};
+let studentDetails = {};
+
+Object.assign(studentDetails,courseDetails,personName);
+courseDetails.course="Computer Science and Engineering";
+console.log(studentDetails,courseDetails,personName)
+*/
 /*
 
 // Spread Operator
@@ -183,7 +251,6 @@ let mappedArr = arr.map((items)=>{
 console.log(mappedArr);
 */
 
-
 /*
 let numbers = [1, 2, -8, 7, -7];
 
@@ -197,3 +264,11 @@ let items = numbers
 
 console.log(items);
 */
+
+// Reducing Array
+
+let arr = [1,2,3,4];
+
+let totalSum = arr.reduce((accumulator,currentValue)=>accumulator+currentValue,0);
+
+console.log(totalSum);
