@@ -22,7 +22,7 @@
     
         
     // By Assign Opeator
-    /*    
+        
         let source = {
             name:"Vinayak Vispute",
             age : 19,
@@ -37,7 +37,7 @@
         source.girlfriend="Not Yet LOL";
         console.log(source);
         console.log(destination);
-        */
+    
 
     // By Spread Operator
     /*
