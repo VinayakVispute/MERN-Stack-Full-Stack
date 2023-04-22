@@ -22,17 +22,17 @@
 </head>
 
 <body>
-    <section class="flex justify-center items-center w-full h-screen bg-slate-900">
+    <section class="flex justify-center items-center w-full h-screen bg-slate-900 items-center justify-center flex-col gap-10">
         <!-- Div for Counter & Text -->
         <div class="relative">
             <p class="text-2xl font-bold text-teal-400 py-4">Increment and Decrement</p>
             <!-- counter div -->
-            <div class="flex flex-row justify-evenly  bg-white rounded-sm py-1">
-               <button class="border-r-2 pr-5 border-[#bfbfbf]">
+            <div class="bg-white flex gap-12 p-3 px-5 rounded-sm text-[25px] text-[#344151]">
+               <button class="border-r-2 pr-5 border-[#bfbfbf] flex justify-center items-center" onclick="decrement()" id="decrement">
                 <i class="fa-solid fa-minus"></i>
             </button>
-                <div class="text-4xl px-6">0</div>
-                <button class="border-l-2 pr-5 border-[#bfbfbf]"><i class="fa-solid fa-plus"></i></button>
+                <div class="text-4xl px-6" id="counterDigit">0</div>
+                <button class="border-l-2 pl-5 border-[#bfbfbf]" onclick="increment()" id="increment"><i class="fa-solid fa-plus"></i></button>
                 
             </div>
         </div>
