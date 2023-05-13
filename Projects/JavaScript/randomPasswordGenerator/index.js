@@ -14,11 +14,24 @@ const symbolsList = "$%&*_+-=~`;:.,|/()[]{}<>!@";
 
 let password = "";
 let passwordLength = 10;
-let checkCount = 1;
+let checkCount = 0;
 // Set Strength Indicator circle color
 let dataIndicatorColor = "gray";
-
+checkUpperCase.checked = true;
 // <----------Functions-------->
+
+function shufflePassword(array) {
+  // Fisher Yates Method
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  let str = "";
+  array.forEach((el) => (str += el));
+  return str;
+}
 
 //For Handling SLider
 dataLengthNumber.innerText = passwordLength = dataLengthSlider.value;
@@ -49,13 +62,13 @@ function getRandomNumber() {
 }
 function generateLowerCase() {
   return String.fromCharCode(
-    getRandomInteger("a".charCodeAt(0), "z".charCodeAt(0))
+    getRandomInteger(97, 123)
   );
 }
 
 function generateUpperCase() {
   return String.fromCharCode(
-    getRandomInteger("A".charCodeAt(0), "Z".charCodeAt(0))
+    getRandomInteger(65, 91)
   );
 }
 
@@ -123,12 +136,13 @@ copyBtn.addEventListener("click", () => {
 
 function handleCheckBoxChange() {
   checkCount = 0;
+  console.log(checkCount);
   allCheckBox.forEach((checkbox) => {
     if (checkbox.checked) {
-      console.log("f", checkCount);
       checkCount++;
     }
   });
+  console.log("sd",checkCount);
 
   if (passwordLength < checkCount) {
     passwordLength = checkCount;
@@ -139,30 +153,27 @@ function handleCheckBoxChange() {
 allCheckBox.forEach((checkbox) => {
   checkbox.addEventListener("change", handleCheckBoxChange);
 });
-let funArray = [];
-
 
 generateButton.addEventListener("click", () => {
   // none of checkbox are selected
-  if (checkCount <= 0) {
-    return;
-  }
+  if (checkCount <= 0) return;
+
+
   if (passwordLength < checkCount) {
     passwordLength = checkCount;
     handleSlider();
   }
 
-  // Let's Start Jounery to find new password
 
   // remove old password
-  password = "";
+  if (password.length) password = "";
 
   // Let fullfill requirement mentioned by checkbox
 
   // if(checkUpperCase.checked){
   //   pasword+=generateUpperCase();
   // }
-  // if(checkLowerCase.checked){
+   // if(checkLowerCase.checked){
   //   pasword+=generateLowerCase();
   // }
   // if(checkNumbers.checked){
@@ -172,37 +183,39 @@ generateButton.addEventListener("click", () => {
   //   pasword+=generateSymbol();
   // }
 
-  // let funArray = [];
+  let funArray = [];
 
-  if (checkUpperCase.checked) {
-    funArray.push(generateUpperCase());
-  }
-  if (checkLowerCase.checked) {
-    funArray.push(generateLowerCase());
-  }
-  if (checkNumbers.checked) {
-    funArray.push(getRandomNumber());
-  }
-  if (checkSymbols.checked) {
-    funArray.push(generateSymbol());
-  }
+    if (checkUpperCase.checked) {
+      funArray.push(generateUpperCase);
+    }
+    if (checkLowerCase.checked) {
+      funArray.push(generateLowerCase);
+    }
+    if (checkNumbers.checked) {
+      funArray.push(getRandomNumber);
+    }
+    if (checkSymbols.checked) {
+      funArray.push(generateSymbol);
+    }
+console.log(funArray)
+    // compulsory addition
+    let count = 0;
+    for (let i = 0; i < funArray.length; i++) {
+      password += funArray[i]();
+      count++;
+    }
 
-  // compulsory addition
-let count =0;
-  for(let i = 0;i<funArray.length;i++){
+    //remaining addition
 
-    password +=funArray[i];
-    count++;
-  }
+    for (let i = 0; i < passwordLength - funArray.length; i++) {
+      console.log(getRandomInteger(0, funArray.length))
+      password += funArray[getRandomInteger(0, funArray.length)]();
+      count++;
+    }
 
-  //remaining addition
+    password = shufflePassword(Array.from(password));
+    dataPasswordDisplay.value = password;
 
-  for(let i =0;i<passwordLength-funArray.length;i++){
-    password+=funArray[getRandomInteger(0,funArray.length)]
-    count++;
-
-  }
-  console.log(count);
-  funArray.length=0;
-  dataPasswordDisplay.placeholder = password;
+    calcStrength();
+  
 });
