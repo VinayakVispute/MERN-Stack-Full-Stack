@@ -14,7 +14,7 @@ const symbolsList = "$%&*_+-=~`;:.,|/()[]{}<>!@";
 
 let password = "";
 let passwordLength = 10;
-let checkCount = 0;
+let checkCount = 1;
 // Set Strength Indicator circle color
 let dataIndicatorColor = "gray";
 checkUpperCase.checked = true;
