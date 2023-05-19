@@ -1,3 +1,14 @@
-.tab.activeTab{
+.tab.currentTab{
     background-color: rgba(219, 226, 239, .5);
+    border-radius: 4px;
+}
+
+.tab{
+    cursor:pointer
+}
+
+.location-search-bar.active{
+    scale: 1;
+    opacity: 1;
+    display: flex;
 }
