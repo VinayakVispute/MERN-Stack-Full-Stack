@@ -1,6 +1,30 @@
-console.log("Hello Guys, It's Vinayak!");
+// Fetching Elements
+const userTab = document.querySelector("[data-UserWeatherTab]");
+const SearchTab = document.querySelector("[data-SearchWeatherTab]");
+const userContainer = document.querySelector(".main-container");
+const grantUserLocation = document.querySelector(".grant-location-container");
+const searchBarContainer = document.querySelector("[location-searchForm]");
+const loadingScreen = document.querySelector(".loading-screen-container");
+const weatherInfoContainer = document.querySelector(".weather-info-container");
 
+// Variables
 const API_KEY = "c30dafcd337461868e68ebd745919280";
+let currentTab = userTab;
+currentTab.classList.add("activeTab");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function renderWeatherInfo(data) {
   let newPara = document.createElement("p");
@@ -47,4 +71,3 @@ async function getLocation(position) {
     console.log(error);
   }
 }
-
