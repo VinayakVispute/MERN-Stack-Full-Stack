@@ -6,12 +6,6 @@ const grantUserLocation = document.querySelector(".grant-location-container");
 const searchBarContainer = document.querySelector("[location-searchForm]");
 const loadingScreen = document.querySelector(".loading-screen-container");
 const weatherInfoContainer = document.querySelector(".weather-info-container");
-const cityName = document.querySelector(".cityName");
-const cityFlag = document.querySelector(".cityFlag");
-const temperature = document.querySelector(".temperature")
-const speedParameter = document.querySelector(".parameter-SpeedValue");
-const humidityParameter = document.querySelector(".parameter-HumidityValue")
-const cloudParameter = document.querySelector(".parameter-CloudsValue")
 
 // Variables
 const API_KEY = "c30dafcd337461868e68ebd745919280";
@@ -72,15 +66,13 @@ async function getLocation(position) {
 }
 
 async function getUserLocation() {
-  let storedCoordinates = JSON.parse(
-    sessionStorage.getItem("userCoordinates")
-  );
+  let storedCoordinates = JSON.parse(sessionStorage.getItem("userCoordinates"));
 
-  console.log(storedCoordinates.latitude,storedCoordinates.longitude);
+  console.log(storedCoordinates.latitude, storedCoordinates.longitude);
 
-  grantUserLocation.classList.remove("active")
+  grantUserLocation.classList.remove("active");
   loadingScreen.classList.add("active");
- 
+
   const apiResponse = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?lat=${storedCoordinates.latitude}&lon=${storedCoordinates.longitude}&appid=${API_KEY}&units=metric`
   );
@@ -91,15 +83,25 @@ async function getUserLocation() {
   renderWeatherInfo(responseData);
 }
 
-
 function renderWeatherInfo(data) {
   weatherInfoContainer.classList.add("active");
-  cityName.textContent = data.name;
-  cityFlag.src = `https://flagcdn.com/144x108/${}.png`
-  temperature.textContent = data.main.temp;
-  speedParameter.textContent = data.wind.speed;
-  humidityParameter.textContent = data.main.humidity;
-  cloudParameter.textContent = data.clouds.all;
+  const cityName = document.querySelector(".cityName");
+  const cityFlag = document.querySelector(".cityFlag");
+  const temperature = document.querySelector(".temperature");
+  const speedParameter = document.querySelector(".parameter-SpeedValue");
+  const humidityParameter = document.querySelector(".parameter-HumidityValue");
+  const cloudParameter = document.querySelector(".parameter-CloudsValue");
+  const description = document.querySelector(".weatherDescription");
+
+  weatherInfoContainer.classList.add("active");
+  cityName.innerText = data.name;
+  cityFlag.src = `https://flagcdn.com/144x108/${data.sys.country.toLowerCase()}.png`;
+  description.innerText = data.weather[0].description;
+  console.log(data.weather);
+  temperature.innerText = data.main.temp;
+  speedParameter.innerText = data.wind.speed;
+  humidityParameter.innerText = data.main.humidity;
+  cloudParameter.innerText = data.clouds.all;
 }
 
 userTab.addEventListener("click", () => {
