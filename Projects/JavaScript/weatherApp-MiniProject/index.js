@@ -7,6 +7,7 @@ const searchBarContainer = document.querySelector("[location-searchForm]");
 const loadingScreen = document.querySelector(".loading-screen-container");
 const weatherInfoContainer = document.querySelector(".weather-info-container");
 
+
 // Variables
 const API_KEY = "c30dafcd337461868e68ebd745919280";
 let currentTab = userTab;
