@@ -6,6 +6,11 @@ const grantUserLocation = document.querySelector(".grant-location-container");
 const searchBarContainer = document.querySelector("[location-searchForm]");
 const loadingScreen = document.querySelector(".loading-screen-container");
 const weatherInfoContainer = document.querySelector(".weather-info-container");
+const grantBtn = document.querySelector("[data-grantAccess]")
+
+
+// keep this in situatable place
+const searchBar = document.querySelector("[location-searchInput]");
 
 // Variables
 const API_KEY = "c30dafcd337461868e68ebd745919280";
@@ -33,15 +38,14 @@ function switchTab(clickedTab) {
   }
 }
 
+
 async function getfromSessionStorage() {
   if (navigator.geolocation) {
     try {
       console.log("in try");
       const localCorrdinates = sessionStorage.getItem("userCoordinates");
       if (!localCorrdinates) {
-        console.log("in if");
         grantUserLocation.classList.add("active");
-        navigator.geolocation.getCurrentPosition(getLocation);
       } else {
         console.log("location is avaliable");
         getUserLocation();
@@ -51,7 +55,9 @@ async function getfromSessionStorage() {
     }
   }
 }
-
+grantBtn.addEventListener('click',()=>{
+navigator.geolocation.getCurrentPosition(getLocation);
+})
 async function getLocation(position) {
   try {
     console.log("in getlocation");
@@ -130,3 +136,23 @@ async function fetchWeatherDetails(city) {
     console.log(error);
   }
 }
+
+searchBarContainer.addEventListener('submit',async (event)=>{
+  console.clear();
+  event.preventDefault();
+  console.log("prevented default")
+  try {
+    let city = searchBar.value;
+    console.log("Value",city)
+    const apiResponse = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+    );
+    const responseData = await apiResponse.json();
+    console.log("response",responseData)
+
+      renderWeatherInfo(responseData);
+  } catch (error) {
+    console.log(error);
+    
+  }
+})
