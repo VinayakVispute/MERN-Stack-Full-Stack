@@ -6,8 +6,12 @@ const grantUserLocation = document.querySelector(".grant-location-container");
 const searchBarContainer = document.querySelector("[location-searchForm]");
 const loadingScreen = document.querySelector(".loading-screen-container");
 const weatherInfoContainer = document.querySelector(".weather-info-container");
-const cityName = document.querySelector(".cityName")
-
+const cityName = document.querySelector(".cityName");
+const cityFlag = document.querySelector(".cityFlag");
+const temperature = document.querySelector(".temperature")
+const speedParameter = document.querySelector(".parameter-SpeedValue");
+const humidityParameter = document.querySelector(".parameter-HumidityValue")
+const cloudParameter = document.querySelector(".parameter-CloudsValue")
 
 // Variables
 const API_KEY = "c30dafcd337461868e68ebd745919280";
@@ -38,16 +42,15 @@ function switchTab(clickedTab) {
 async function getfromSessionStorage() {
   if (navigator.geolocation) {
     try {
-      console.log("in try")
+      console.log("in try");
       const localCorrdinates = sessionStorage.getItem("userCoordinates");
       if (!localCorrdinates) {
-      console.log("in if")
-      navigator.geolocation.getCurrentPosition(getLocation);
-      }
-      else {
-      console.log("in else")
-
+        console.log("in if");
         grantUserLocation.classList.add("active");
+        navigator.geolocation.getCurrentPosition(getLocation);
+      } else {
+        console.log("location is avaliable");
+        getUserLocation();
       }
     } catch (error) {
       console.log(error);
@@ -57,31 +60,47 @@ async function getfromSessionStorage() {
 
 async function getLocation(position) {
   try {
-    console.log("in getlocation")
+    console.log("in getlocation");
 
-    let {latitude,longitude} =position.coords
+    let { latitude, longitude } = position.coords;
     let userCoordinates = { latitude, longitude };
-    sessionStorage.setItem("userCoordinates",JSON.stringify(userCoordinates))
-    // const apiResponse = await fetch(
-    //   `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
-    // );
-    // console.log("in api fetched")
-
-    // const responseData = await apiResponse.json();
-    // console.log("going to render");
-    // renderWeatherInfo(responseData);
-
+    sessionStorage.setItem("userCoordinates", JSON.stringify(userCoordinates));
+    getUserLocation();
   } catch (error) {
     console.log(error);
   }
 }
 
-function renderWeatherInfo(data) {
-  console.log(data.name);
-  cityName.textContent=data.name;
+async function getUserLocation() {
+  let storedCoordinates = JSON.parse(
+    sessionStorage.getItem("userCoordinates")
+  );
 
+  console.log(storedCoordinates.latitude,storedCoordinates.longitude);
+
+  grantUserLocation.classList.remove("active")
+  loadingScreen.classList.add("active");
+ 
+  const apiResponse = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?lat=${storedCoordinates.latitude}&lon=${storedCoordinates.longitude}&appid=${API_KEY}&units=metric`
+  );
+  console.log("in api fetched");
+  const responseData = await apiResponse.json();
+  loadingScreen.classList.remove("active");
+  console.log("going to render");
+  renderWeatherInfo(responseData);
 }
 
+
+function renderWeatherInfo(data) {
+  weatherInfoContainer.classList.add("active");
+  cityName.textContent = data.name;
+  cityFlag.src = `https://flagcdn.com/144x108/${}.png`
+  temperature.textContent = data.main.temp;
+  speedParameter.textContent = data.wind.speed;
+  humidityParameter.textContent = data.main.humidity;
+  cloudParameter.textContent = data.clouds.all;
+}
 
 userTab.addEventListener("click", () => {
   // pass current tab to to function
@@ -96,8 +115,6 @@ SearchTab.addEventListener("click", () => {
   switchTab(SearchTab);
 });
 
-
-
 async function fetchWeatherDetails(city) {
   try {
     const apiResponse = await fetch(
@@ -111,5 +128,3 @@ async function fetchWeatherDetails(city) {
     console.log(error);
   }
 }
-
-
