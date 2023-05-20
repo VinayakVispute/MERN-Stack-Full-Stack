@@ -6,8 +6,8 @@ const grantUserLocation = document.querySelector(".grant-location-container");
 const searchBarContainer = document.querySelector("[location-searchForm]");
 const loadingScreen = document.querySelector(".loading-screen-container");
 const weatherInfoContainer = document.querySelector(".weather-info-container");
-const grantBtn = document.querySelector("[data-grantAccess]")
-
+const grantBtn = document.querySelector("[data-grantAccess]");
+const weatherIcon = document.querySelector(".weatherIcon")
 
 // keep this in situatable place
 const searchBar = document.querySelector("[location-searchInput]");
@@ -38,7 +38,6 @@ function switchTab(clickedTab) {
   }
 }
 
-
 async function getfromSessionStorage() {
   if (navigator.geolocation) {
     try {
@@ -55,9 +54,9 @@ async function getfromSessionStorage() {
     }
   }
 }
-grantBtn.addEventListener('click',()=>{
-navigator.geolocation.getCurrentPosition(getLocation);
-})
+grantBtn.addEventListener("click", () => {
+  navigator.geolocation.getCurrentPosition(getLocation);
+});
 async function getLocation(position) {
   try {
     console.log("in getlocation");
@@ -78,15 +77,18 @@ async function getUserLocation() {
 
   grantUserLocation.classList.remove("active");
   loadingScreen.classList.add("active");
-
-  const apiResponse = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${storedCoordinates.latitude}&lon=${storedCoordinates.longitude}&appid=${API_KEY}&units=metric`
-  );
-  console.log("in api fetched");
-  const responseData = await apiResponse.json();
-  loadingScreen.classList.remove("active");
-  console.log("going to render");
-  renderWeatherInfo(responseData);
+  try {
+    const apiResponse = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${storedCoordinates.latitude}&lon=${storedCoordinates.longitude}&appid=${API_KEY}&units=metric`
+    );
+    console.log("in api fetched");
+    const responseData = await apiResponse.json();
+    loadingScreen.classList.remove("active");
+    console.log("going to render");
+    renderWeatherInfo(responseData);
+  } catch (error) {
+    loadingScreen.classList.add("active");
+  }
 }
 
 function renderWeatherInfo(data) {
@@ -103,6 +105,7 @@ function renderWeatherInfo(data) {
   cityName.innerText = data.name;
   cityFlag.src = `https://flagcdn.com/144x108/${data.sys.country.toLowerCase()}.png`;
   description.innerText = data.weather[0].description;
+  weatherIcon.src=`http://openweathermap.org/img/w/${data?.weather?.[0]?.icon}.png`;
   console.log(data.weather);
   temperature.innerText = data.main.temp;
   speedParameter.innerText = data.wind.speed;
@@ -124,11 +127,16 @@ SearchTab.addEventListener("click", () => {
 });
 
 async function fetchWeatherDetails(city) {
+
+  loadingScreen.classList.add("active");
+  weatherInfoContainer.classList.remove("active");
+  grantUserLocation.classList.remove("active");
   try {
     const apiResponse = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
     );
     const responseData = await apiResponse.json();
+    loadingScreen.classList.remove("active");
     renderWeatherInfo(responseData);
     console.log("Wheather Details => ", responseData);
   } catch (error) {
@@ -137,22 +145,21 @@ async function fetchWeatherDetails(city) {
   }
 }
 
-searchBarContainer.addEventListener('submit',async (event)=>{
+searchBarContainer.addEventListener("submit", async (event) => {
   console.clear();
   event.preventDefault();
-  console.log("prevented default")
+  console.log("prevented default");
   try {
     let city = searchBar.value;
-    console.log("Value",city)
+    console.log("Value", city);
     const apiResponse = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
     );
     const responseData = await apiResponse.json();
-    console.log("response",responseData)
+    console.log("response", responseData);
 
-      renderWeatherInfo(responseData);
+    renderWeatherInfo(responseData);
   } catch (error) {
     console.log(error);
-    
   }
-})
+});
