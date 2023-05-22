@@ -19,6 +19,8 @@ const API_KEY = "c30dafcd337461868e68ebd745919280";
 let currentTab = userTab;
 currentTab.classList.add("currentTab");
 
+getfromSessionStorage();
+
 // tab Switching concept
 function switchTab(clickedTab) {
   if (clickedTab != currentTab) {
@@ -72,9 +74,7 @@ async function getLocation(position) {
 
 async function getUserLocation() {
   let storedCoordinates = JSON.parse(sessionStorage.getItem("userCoordinates"));
-
   console.log(storedCoordinates.latitude, storedCoordinates.longitude);
-
   grantUserLocation.classList.remove("active");
   loadingScreen.classList.add("active");
   try {
@@ -107,7 +107,7 @@ function renderWeatherInfo(data) {
   description.innerText = data.weather[0].description;
   weatherIcon.src=`http://openweathermap.org/img/w/${data?.weather?.[0]?.icon}.png`;
   console.log(data.weather);
-  temperature.innerText = data.main.temp;
+  temperature.innerText = `${data.main.temp } °C`;
   speedParameter.innerText = data.wind.speed;
   humidityParameter.innerText = data.main.humidity;
   cloudParameter.innerText = data.clouds.all;

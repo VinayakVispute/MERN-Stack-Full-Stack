@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
     <link rel="stylesheet" href="./style.css">
     <title>Weather App | Vinayak Vispute</title>
 </head>
@@ -21,7 +25,7 @@
         <div class="main-container">
 
             <!-- Grant location container -->
-            <div class="grant-location-container">
+            <div class="sub-container grant-location-container">
                 <img src="./assets/location.png" alt="" width="80" height="80" loading="lazy">
                 <p>Grant Location Access</p>
                 <p>Allow Access To Get Weather Information</p>
@@ -38,14 +42,14 @@
             </form>
 
             <!-- loading Screen container -->
-            <div class="loading-screen-container">
+            <div class="sub-container loading-screen-container ">
                 <img src="./assets/loading.gif" alt="" width="150" height="150" loading="lazy">
                 <p>Loading...</p>
             </div>
 
 
             <!-- Show Weather Information -->
-            <div class="weather-info-container">
+            <div class="sub-container weather-info-container">
                 <!-- city's Name and Flag -->
                 <div class="name">
                     <p class="cityName" data-cityName></p>
@@ -56,7 +60,7 @@
                 <!-- weather icon according to weather condition -->
                 <img class="weatherIcon" data-weatherIcon>
                 <!-- temperature -->
-                <p><span class="temperature" data-temperature></span>°C</pc>
+                <p class="temperature" data-temperature></p>
 
                     <!-- Extra Information 3 Cards Div -->
                 <div class="parameter-container">
