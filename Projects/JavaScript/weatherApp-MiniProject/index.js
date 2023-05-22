@@ -108,9 +108,9 @@ function renderWeatherInfo(data) {
   weatherIcon.src=`http://openweathermap.org/img/w/${data?.weather?.[0]?.icon}.png`;
   console.log(data.weather);
   temperature.innerText = `${data.main.temp } °C`;
-  speedParameter.innerText = data.wind.speed;
-  humidityParameter.innerText = data.main.humidity;
-  cloudParameter.innerText = data.clouds.all;
+  speedParameter.innerText = `${data.wind.speed} M/s`;
+  humidityParameter.innerText = `${data.main.humidity} %`;
+  cloudParameter.innerText = `${data.clouds.all}` %;
 }
 
 userTab.addEventListener("click", () => {
