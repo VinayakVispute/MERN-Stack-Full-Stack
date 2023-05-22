@@ -110,7 +110,7 @@ function renderWeatherInfo(data) {
   temperature.innerText = `${data.main.temp } °C`;
   speedParameter.innerText = `${data.wind.speed} M/s`;
   humidityParameter.innerText = `${data.main.humidity} %`;
-  cloudParameter.innerText = `${data.clouds.all}` %;
+  cloudParameter.innerText = `${data.clouds.all} %` ;
 }
 
 userTab.addEventListener("click", () => {
