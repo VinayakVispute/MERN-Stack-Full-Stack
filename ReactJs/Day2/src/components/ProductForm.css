@@ -1,0 +1,55 @@
+body{
+  background-color: #121212;
+  color: #ffffff;
+}
+
+
+/* Style for the form container */
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
+  background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+}
+
+
+/* Style for form labels */
+.form-container label {
+  display: block;
+  margin-bottom: 5px;
+  color: #262626;
+  font-weight: bold;
+}
+
+/* Style for input fields */
+.form-container input[type="text"],
+.form-container input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Style for the submit button */
+.form-container button[type="submit"] {
+  background-color: #0095f6;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Style for the submit button on hover */
+.form-container button[type="submit"]:hover {
+  background-color: #0085e8;
+}
+
+/* Style for the form container when focused */
+.form-container:focus-within {
+  box-shadow: 0 0 6px rgba(0, 149, 246, 0.5);
+}
