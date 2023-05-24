@@ -2,13 +2,11 @@ import React from 'react';
 
 import ProductItem from './ProductItem';
 import Card from './Card';
-import NewProduct from './NewProduct'
 import './Products.css';
 
 const Products = (props) => {
   return (
     <>
-    <NewProduct/> 
 
 
     <Card className="products">

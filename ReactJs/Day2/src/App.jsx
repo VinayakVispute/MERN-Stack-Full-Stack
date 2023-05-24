@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Products from './components/Products';
+import NewProduct  from './components/NewProduct';
 
 const App = () => {
   const products = [
@@ -30,12 +31,18 @@ const App = () => {
   ];
 
   function printProductData(data) {
-    console.log("i am inside APP.js")
     console.log(data)
   }
 
+  function newProductStatus(newProduct){
+    console.log("This from App.jsx ")
+    console.log("Apps.jsx",newProduct)
+  }
+
+
   return (
     <div>
+    <NewProduct newProductStatus = {newProductStatus}/>
       <Products items={products} />
     </div>
   );
