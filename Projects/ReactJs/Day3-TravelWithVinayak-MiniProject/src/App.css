@@ -1,0 +1,77 @@
+.refresh {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .refresh .page-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .refresh-button {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  .tours-container {
+    margin-top: 50px;
+  }
+  
+  .tours-container .page-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .tours {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    width: 300px;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .tour-details {
+    margin-bottom: 10px;
+  }
+  
+  .tour-price {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .tour-name {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .description {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .read-more {
+    color: blue;
+    cursor: pointer;
+  }
+  
+  .btn-red {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
