@@ -11,9 +11,10 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongoose": "^7.2.0"
-  },
-  "devDependencies": {
+    "mongoose": "^7.2.0",
     "nodemon": "^2.0.20"
+  },
+  "engines": {
+    "node": ">=16 <17 "
   }
 }
