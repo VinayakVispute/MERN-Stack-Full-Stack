@@ -424,7 +424,7 @@ webpack 5.69.1 compiled successfully in 1275 ms
 
 6. Check the registered email.
 
-![Application - Verify Your Account](link_to_image_6)
+![Application - Verify Your Account](https://res.cloudinary.com/practicaldev/image/fetch/s--BKSzuZtE--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://res.cloudinary.com/rodrigokamada/image/upload/v1646010304/Blog/react-auth0/application-step6.png)
 
 7. Ready! We test the application sign in and profile view. Auth0 documentation is available at [https://auth0.com/docs](https://auth0.com/docs).
 
